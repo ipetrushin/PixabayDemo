@@ -16,11 +16,5 @@ public class Request {
         // TODO: закодировать search_text с помощью URLEncode
         return "q="+search_text+"&key="+key+"&image_type=photo";
     }
-    public byte[] toByteArray() {
-        // TODO: добавить URL-кодирование текста (использовать класс URLEncoder)
-        // TODO: реализовать многострочный перевод
-        // формируем данные веб-формы
-        String data = "q="+search_text+"&key="+key+"&image_type=photo";
-        return data.getBytes();
-    }
+
 }
