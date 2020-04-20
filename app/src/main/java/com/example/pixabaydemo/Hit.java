@@ -8,10 +8,7 @@ public class Hit {
 
     // TODO: toString()
 
-    // TODO: добавить функцию, скачает Bitmap по адресу и отобразит на ImageView
-    public void getAndShowImage(ImageView view) {
-        // получить с сайта previewURL картинку и отобразить на view
-    }
+
 }
 
 /*

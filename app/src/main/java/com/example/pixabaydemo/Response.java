@@ -7,7 +7,7 @@ public class Response {
 
     @Override
     public String toString() {
-        // TODO: вывести текст без []
+
         return "totalHits = " + totalHits;
     }
 }

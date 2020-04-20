@@ -27,19 +27,23 @@ public class PixabayAPITask extends AsyncTask<Request, Void, Response> {
         String API_URL = "https://pixabay.com/api";
         try {
             String urlString = API_URL + "?" + req.formDataToString();
-            Log.d("mytag", urlString);
             URL url = new URL(urlString);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            // если сервер PixaBay переадресует нас на другой URL, сделать повторный запрос
+            while (connection.getResponseCode() == 301) {
+                Log.d("mytag", "HTTP code: " + connection.getResponseCode());
+                String location = connection.getHeaderField("Location");
+                Log.d("mytag", "Redirection to: " + connection.getHeaderField("Location"));
+                url = new URL(location); connection = (HttpURLConnection) url.openConnection();
+            }
 
-            InputStream stream = urlConnection.getInputStream();
-            Scanner sc = new Scanner(stream);
-            String jsonString = sc.nextLine();
-            Log.d("mytag", jsonString);
-            Response response = gson.fromJson(jsonString, Response.class);
+            InputStream stream = connection.getInputStream();
+            Response response = gson.fromJson(new InputStreamReader(stream), Response.class);
             return response;
 
-        } catch (IOException e) { return null; }
-
+        } catch (IOException e) {
+            Log.d("mytag", e.getLocalizedMessage());
+            return null; }
     }
 
     @Override
@@ -51,5 +55,6 @@ public class PixabayAPITask extends AsyncTask<Request, Void, Response> {
     @Override
     protected void onPostExecute(Response response) {
         activity.displayResult(response.toString());
+        // TODO: из результатов поиска извлечь адрес картинки, загрузить её и отобразить на ImageView
     }
 }
