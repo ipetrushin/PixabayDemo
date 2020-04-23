@@ -1,5 +1,7 @@
 package com.example.pixabaydemo;
 
+import java.net.URLEncoder;
+
 public class Request {
     String search_text;
 
@@ -14,7 +16,7 @@ public class Request {
 
     public String formDataToString() {
         // TODO: закодировать search_text с помощью URLEncode
-        return "q="+search_text+"&key="+key+"&image_type=photo";
+        return "q="+ URLEncoder.encode(search_text) +"&key="+key+"&image_type=photo";
     }
 
 }

@@ -5,18 +5,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     ImageView iv;
+    EditText etSearch;
+    ListView list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         iv = findViewById(R.id.image);
+        list = findViewById(R.id.list);
+        etSearch = findViewById(R.id.search_text);
+
     }
 
     public void displayResult(String text) {
@@ -37,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
         task.execute(req);
 
         // TODO: пример использования GetBitmapFromURLTask
-        GetBitmapFromURLTask bmptask = new GetBitmapFromURLTask(this);
-        bmptask.execute("https://cdn.pixabay.com/photo/2018/02/08/22/27/flower-3140492_150.jpg");
+
 
 
 

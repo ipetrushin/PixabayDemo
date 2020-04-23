@@ -2,6 +2,7 @@ package com.example.pixabaydemo;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -56,5 +57,17 @@ public class PixabayAPITask extends AsyncTask<Request, Void, Response> {
     protected void onPostExecute(Response response) {
         activity.displayResult(response.toString());
         // TODO: из результатов поиска извлечь адрес картинки, загрузить её и отобразить на ImageView
+        // Hit hit = response.hits[0];
+        // hit.previewURL
+        PicturesAdapter adapter = new PicturesAdapter(activity, response.hits);
+        activity.list.setAdapter(adapter);
+        /*
+        if (response.hits.length > 0) { // если есть результаты поиска
+            GetBitmapFromURLTask bmptask = new GetBitmapFromURLTask(activity);
+            bmptask.execute(response.hits[0].previewURL);
+        }
+        else {
+            Toast.makeText(activity, "No hits!", Toast.LENGTH_SHORT).show();
+        } */
     }
 }

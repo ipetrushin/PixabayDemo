@@ -3,7 +3,9 @@ package com.example.pixabaydemo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.provider.ContactsContract;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.google.gson.Gson;
 
@@ -14,11 +16,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class GetBitmapFromURLTask extends AsyncTask<String, Void, Bitmap> {
-    final MainActivity activity;
+    //final MainActivity activity;
+    final ImageView iv;
 
     // передаём ссылку на активность, чтобы отобразить результат перевода
-    public GetBitmapFromURLTask(MainActivity activity) {
-        this.activity = activity;
+    public GetBitmapFromURLTask(ImageView iv) {
+        this.iv = iv;
     }
 
     public Bitmap requestToServer(String url) {
@@ -41,7 +44,7 @@ public class GetBitmapFromURLTask extends AsyncTask<String, Void, Bitmap> {
     @Override
     protected void onPostExecute(Bitmap bmp) {
         // задать полученное изображение на ImageView
-        activity.displayImage(bmp);
+        iv.setImageBitmap(bmp);
         Log.d("mytag", "Bitmap size: " + bmp.getByteCount());
     }
 }
