@@ -26,6 +26,7 @@ public class PixabayAPITask extends AsyncTask<Request, Void, Response> {
         Gson gson = new Gson();
 
         String API_URL = "https://pixabay.com/api";
+
         try {
             String urlString = API_URL + "?" + req.formDataToString();
             URL url = new URL(urlString);
