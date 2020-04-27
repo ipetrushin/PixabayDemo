@@ -9,12 +9,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class PicturesAdapter extends BaseAdapter {
     Context ctx;
-
+    Picasso p;
     public PicturesAdapter(Context ctx, Hit[] hits) {
         this.ctx = ctx;
         this.hits = hits;
+        p  = new Picasso.Builder(ctx).build();
+
     }
 
     Hit[] hits;
@@ -43,10 +47,13 @@ public class PicturesAdapter extends BaseAdapter {
         tvid.setText("id: "+h.id);
 
         iv.setImageResource(R.drawable.no_image);
-        GetBitmapFromURLTask bmptask = new GetBitmapFromURLTask(iv);
+        /*GetBitmapFromURLTask bmptask = new GetBitmapFromURLTask(iv);
         bmptask.execute(h.previewURL);
         Log.d("mytag", "loading id: "+h.id);
+        */
 
+        p.load(h.previewURL).error(R.drawable.no_image).into(iv);
+        Log.d("mytag", "Loading: " + h.previewURL);
         return convertView;
     }
 }
