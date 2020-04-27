@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     interface PixabayAPI {
         @GET("/api") // путь к API
+        // q=1213&key=fefefe&image_type=ewfwefwe
         Call<Response> search( @Query("q") String q, @Query("key") String key, @Query("image_type") String image_type);
 
         // Тип ответа, действие, тип запроса
